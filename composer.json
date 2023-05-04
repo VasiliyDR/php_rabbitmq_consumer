@@ -3,7 +3,8 @@
         "php-amqplib/php-amqplib": "^3.5",
         "ext-amqp": "*",
         "ext-json": "*",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "*"
     },
     "autoload": {
     "psr-4": {

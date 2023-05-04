@@ -1,6 +1,7 @@
 <?php
 namespace php_deamon\classes;
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . "/../loadenv.php";
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 abstract class Consumer
 {
@@ -11,7 +12,7 @@ abstract class Consumer
 
     public function __construct(string $queueName)
     {
-        $this->rabbitmq_conn = new AMQPStreamConnection('192.168.10.250', 5672, 'guest', 'guest');
+        $this->rabbitmq_conn = new AMQPStreamConnection($_ENV['MQ_HOST'], $_ENV['MQ_PORT'], $_ENV['MQ_USERNAME'], $_ENV['MQ_PASSWORD']);
         $this->queueName = $queueName;
     }
 
