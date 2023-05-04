@@ -1,4 +1,5 @@
 <?php
+namespace php_deamon\consumers;
 use php_deamon\classes\ConsumerServiceSparePartsFrom1C;
 require_once __DIR__ . '/../classes/ConsumerServiceSparePartsFrom1C.php';
 
