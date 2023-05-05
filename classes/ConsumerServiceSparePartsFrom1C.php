@@ -8,9 +8,9 @@ use php_deamon\classes\database\DB;
 
 class ConsumerServiceSparePartsFrom1C extends Consumer
 {
-    public function __construct(string $queueName = "spare_part_to_crm")
+    public function __construct()
     {
-        parent::__construct($queueName);
+        parent::__construct("spare_part_to_crm", 'consumer_service_spare_parts_from_1c_logger', __DIR__ . '/../storage/logs/ERROR_consumer_service_spare_parts_from_1c_logger.log');
     }
 
     protected function process()
@@ -32,9 +32,9 @@ class ConsumerServiceSparePartsFrom1C extends Consumer
                     $st->execute(array_values($d));
                 }
                 echo PHP_EOL . 'Таблица service_spare_parts обновлена!';
-//        $msg->ack();
+                $msg->ack();
             } catch (PDOException $e) {
-                echo PHP_EOL . 'Таблица service_spare_parts не обновлена! ' . PHP_EOL . $e;
+                $this->logger->error(PHP_EOL . 'Таблица service_spare_parts не обновлена! ' . PHP_EOL . $e);
             }
 
         };

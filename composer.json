@@ -4,7 +4,8 @@
         "ext-amqp": "*",
         "ext-json": "*",
         "ext-pdo": "*",
-        "vlucas/phpdotenv": "*"
+        "vlucas/phpdotenv": "*",
+        "monolog/monolog": "^3.3"
     },
     "autoload": {
     "psr-4": {

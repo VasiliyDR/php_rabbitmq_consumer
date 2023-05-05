@@ -10,9 +10,9 @@ use php_deamon\classes\database\DB;
 
 class ConsumerServiceOrderNumberFrom1C extends Consumer
 {
-    public function __construct(string $queueName = "service_order_to_php")
+    public function __construct()
     {
-        parent::__construct($queueName);
+        parent::__construct("service_order_to_php", 'consumer_service_order_number_from_1c_logger', __DIR__ . '/../storage/logs/ERROR_consumer_service_order_number_from_1c_logger.log');
     }
 
     protected function process()
@@ -30,10 +30,10 @@ class ConsumerServiceOrderNumberFrom1C extends Consumer
                 $stmt->bindParam(':order_name',  $payload_arr['order_name'], PDO::PARAM_STR);
                 $stmt->bindParam(':uid_order', $payload_arr['order_uid'], PDO::PARAM_STR);
                 $stmt->execute();
-                //        $msg->ack();
+                $msg->ack();
                 echo PHP_EOL . 'DONE: Поле order_name_1c в таблице service_orders обновлено!';
             } catch (PDOException $e) {
-                echo PHP_EOL . 'ERROR: Поле order_name_1c в таблице service_orders не обновлено!' . PHP_EOL . $e;
+                $this->logger->error(PHP_EOL . 'ERROR: Поле order_name_1c в таблице service_orders не обновлено!' . PHP_EOL . $e);
             }
 
         };
